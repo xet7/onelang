@@ -23,7 +23,7 @@ classes:
         includes: ["Foundation"]
         template: "{{self}}.replacingOccurrences(of: {{from}}, with: {{to}})"
       substrMatch:
-        template: "{{self}}[{{self}}.index({{self}}.startIndex, offsetBy: {{offset}}) ..< {{self}}.endIndex].hasPrefix({{str}})"
+        template: "String({{self}}[{{self}}.index({{self}}.startIndex, offsetBy: {{offset}}) ..< {{self}}.endIndex]).hasPrefix({{str}})"
   OneNumber:
     type: Int
   OneBoolean:
@@ -98,7 +98,7 @@ templates:
     {{for class in classes|sep=\n\n}}
       class {{class.name}} {
         {{for field in class.fields|sep=\n}}
-          {{if field.static}}static {{/if}}var {{field.name}}: {{field.type}}{{if field.typeInfo.isComplexClass && !field.typeInfo.isOneArray}}?{{/if}}{{if field.initializer}} = {{gen(field.initializer)}}{{/if}}
+          {{if field.static}}static {{/if}}var {{field.name}}: {{field.type}}{{if field.typeInfo.isComplexClass or field.typeInfo.isString}}?{{/if}}{{if field.initializer}} = {{gen(field.initializer)}}{{/if}}
         {{/for}}
 
         {{if class.constructor}}
@@ -188,10 +188,10 @@ expressions:
   methodArgument: "{{expr.varRef.name}}"
   instanceField: |-
     {{gen(expr.thisExpr)}}.{{expr.varRef.outName}}
-    {{if expr.valueType.isComplexClass && !expr.valueType.isOneArray|inline}}!{{/if}}
+    {{if expr.valueType.isComplexClass or expr.valueType.isString|inline}}!{{/if}}
   staticField: |-
     {{gen(expr.thisExpr)}}.{{expr.varRef.outName}}
-    {{if expr.valueType.isComplexClass && !expr.valueType.isOneArray|inline}}!{{/if}}
+    {{if expr.valueType.isComplexClass or expr.valueType.isString|inline}}!{{/if}}
   falseLiteral: "false"
   trueLiteral: "true"
   elementAccess: "{{gen(expr.object)}}[{{gen(expr.elementExpr)}}]"

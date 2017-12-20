@@ -76,7 +76,7 @@ langs = {
     },
     "Swift": {
         "ext": "swift",
-        "cmd": "cat ../../langs/StdLibs/one.swift {name}.swift | swift -"
+        "cmd": "cat {name}_StdLib.swift {name}.swift | swift -"
     },
     "TypeScript": {
         "ext": "ts",
