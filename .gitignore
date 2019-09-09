@@ -12,3 +12,6 @@ tmp/
 generated/**/*.json
 generated/**/*_Init.txt
 .secret_token
+/CompilerBackend
+/generated
+
