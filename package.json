@@ -52,7 +52,7 @@
     "mkdirp": "^1.0.4",
     "mocha": "^10.2.0",
     "module-alias": "^2.2.2",
-    "release-it": "^14.0.2",
+    "release-it": "^15.11.0",
     "request": "^2.88.0",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
